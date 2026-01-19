@@ -1,21 +1,31 @@
 import tkinter as tk
 from tkinter import messagebox
-
-def get_text():
+global data
+def save():
   data = text.get("1.0", "end-1c")
-  print(f"{len(data)}文字")
-  memo = data
+  # memo = data
 
 def show_text():
   data = text.get("1.0", "end-1c")
   messagebox.showinfo("カウント結果", f"{len(data)}文字です")
 
+def make_window():
+  sub = tk.Toplevel(root)
+  sub.title("メモ2")
+  sub.geometry("400x300")
+  sub.focus_set()
+  sub_text = tk.Text(sub)
+  sub_text.pack(expand=True, fill="both")
+  sub_text.insert(tk.END, data)
+
 
 # ウィンドウ作成
 root = tk.Tk()
-root.title("メモ帳")
+root.title("メモ1")
 root.geometry("400x300")
 tk.Button(root, text="文字数をカウントする", command=show_text).pack()
+tk.Button(root, text="保存", command=save).pack()
+tk.Button(root, text="新しいメモを作成", command=make_window).pack()
 
 
 # テキストエリア
